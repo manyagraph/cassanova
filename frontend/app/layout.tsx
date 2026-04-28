@@ -16,6 +16,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* GitHub Pages SPA routing: restores URL after 404.html redirect */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function(){
+            var redirect = sessionStorage.redirect;
+            delete sessionStorage.redirect;
+            if (redirect && redirect !== location.href) {
+              history.replaceState(null, null, redirect);
+            }
+          })();
+        ` }} />
+      </head>
       <body className="antialiased">
         <AuthProvider>
           <Header />
